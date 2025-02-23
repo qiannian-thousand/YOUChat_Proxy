@@ -651,7 +651,7 @@ class YouProvider {
 
         if (!isLoaded) {
             console.log('页面尚未加载完成，等待加载...');
-            await page.waitForNavigation({waitUntil: 'domcontentloaded', timeout: 10000}).catch(() => {
+            await page.waitForNavigation({waitUntil: 'domcontentloaded', timeout: 5000}).catch(() => {
                 console.log('页面加载超时，继续执行');
             });
         }
@@ -1047,7 +1047,6 @@ class YouProvider {
                         break;
                     }
 
-                    process.stdout.write(processedContent);
                     accumulatedResponse += processedContent;
 
                     if (Date.now() - startTime >= 20000) {
@@ -1060,7 +1059,6 @@ class YouProvider {
                         finalResponse += processedContent;
                     }
 
-                    // 检查自定义结束标记
                     if (customEndMarkerEnabled && customEndMarker && checkEndMarker(responseAfter20Seconds, customEndMarker)) {
                         isEnding = true;
                         console.log("检测到自定义终止，关闭请求");
